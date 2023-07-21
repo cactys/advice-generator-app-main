@@ -1,26 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { keyframes, styled } from 'styled-components';
-import { fadeIn } from 'react-animations';
+import { bounceIn } from 'react-animations';
 
 import { BsDice5Fill, BsMoonFill } from 'react-icons/bs';
 
-import { api } from '../utils/api';
+import { Dots } from 'react-preloaders';
+
 import { Card } from './Card';
 
 import { ThemeChange } from '../UI/ThemeChange';
 import { Button } from '../UI/Button';
 import { CardAdvice } from '../UI/CardAdvice';
 import { CardTitle } from '../UI/CardTitle';
-import { useDispatch, useSelector, useStore } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchAdvices } from '../services/asyncThunk/fetchAdvices';
+import { setSelectTheme } from '../services/slices/themeSlice';
+import Circle from 'react-preloaders/lib/Circle/Circle';
 
-const Animation = keyframes`${fadeIn}`;
+const Animation = keyframes`${bounceIn}`;
 
 const AnimatedWrapper = styled.div`
   display: flex;
   flex: 1 auto;
 
-  animation: ${Animation} 2s alternate;
+  animation: ${Animation} 1s forwards;
 `;
 
 const Wrapper = styled.main`
@@ -32,15 +35,14 @@ const Wrapper = styled.main`
 `;
 
 function App() {
-  const [theme, setTheme] = useState('dark');
-  // const [advices, setAdvices] = useState('');
-
   const { advices, status } = useSelector((store) => store.advices);
+  const { theme } = useSelector((state) => state.theme);
+
   const dispatch = useDispatch();
 
-  console.log(status);
-
-  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
+  const toggleTheme = () => {
+    dispatch(setSelectTheme(theme === 'dark' ? 'light' : 'dark'));
+  };
 
   const handleRenderAdvice = () => {
     dispatch(fetchAdvices());
@@ -53,6 +55,7 @@ function App() {
   return (
     <Wrapper>
       <Card>
+        <Circle />
         {status === 'resolved' ? (
           <AnimatedWrapper>
             <CardTitle title="Advice" id={advices.id} />
