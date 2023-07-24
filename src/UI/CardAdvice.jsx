@@ -3,9 +3,6 @@ import { styled } from 'styled-components';
 const Wrapper = styled.p.attrs({
   className: 'advice',
 })`
-  .advice {
-    font-size: 68px;
-  }
   display: flex;
   flex: 1;
   margin: 1rem auto;

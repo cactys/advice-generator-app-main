@@ -1,5 +1,16 @@
-import { styled } from 'styled-components';
-import { BsPauseFill } from 'react-icons/bs';
+import { keyframes, styled } from 'styled-components';
+import { BsDice5Fill, BsMoonFill, BsPauseFill } from 'react-icons/bs';
+import { ThemeChange } from '../UI/ThemeChange';
+import { Button } from '../UI/Button';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAdvices } from '../services/asyncThunk/fetchAdvices';
+import { CardTitle } from '../UI/CardTitle';
+import { CardAdvice } from '../UI/CardAdvice';
+import { Preloader } from '../UI/Preloader/Preloader';
+import { fadeIn } from 'react-animations';
+
+const Animation = keyframes`${fadeIn}`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,6 +47,7 @@ const SeparatorLine = styled.span`
   width: 100%;
   display: inline-block;
   background-color: var(--color-text-alt);
+  box-shadow: var(--shadow);
 `;
 
 const SeparatorIcon = styled.span`
@@ -46,10 +58,53 @@ const SeparatorIcon = styled.span`
   width: 24px;
 `;
 
-export const Card = ({ children }) => {
+const AnimatedWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 12px;
+  flex: 1 auto;
+
+  animation: ${Animation} 2s alternate;
+`;
+
+const EmptyContainer = styled.div`
+  display: flex;
+  flex: 1;
+`;
+
+export const Card = () => {
+  const { advices, status } = useSelector((store) => store.advices);
+  const dispatch = useDispatch();
+
+  const [theme, setTheme] = useState('dark');
+
+  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
+
+  const handleRenderAdvice = () => {
+    dispatch(fetchAdvices());
+  };
+
+  useEffect(() => {
+    document.body.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  console.log(status);
+
   return (
     <Wrapper>
-      {children}{' '}
+      {status ? (
+        status === 'loading' ? (
+          <Preloader />
+        ) : (
+          <AnimatedWrapper>
+            <CardTitle title="Advice" id={advices.id} />
+            <CardAdvice context={advices.advice} />
+          </AnimatedWrapper>
+        )
+      ) : (
+        <EmptyContainer>Click to green button...</EmptyContainer>
+      )}
       <CardSeparator>
         <SeparatorLine />
         <SeparatorIcon>
@@ -57,6 +112,22 @@ export const Card = ({ children }) => {
         </SeparatorIcon>
         <SeparatorLine />
       </CardSeparator>
+      <ThemeChange
+        onClick={toggleTheme}
+        position="absolute"
+        top="0.75rem"
+        right="0.75rem"
+      >
+        {theme} Theme <BsMoonFill />
+      </ThemeChange>
+      <Button
+        position="absolute"
+        top="calc(100% - 20px)"
+        left="calc(50% - 20px)"
+        onClick={handleRenderAdvice}
+      >
+        <BsDice5Fill size={16} />
+      </Button>
     </Wrapper>
   );
 };
