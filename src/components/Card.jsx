@@ -9,6 +9,7 @@ import { CardTitle } from '../UI/CardTitle';
 import { CardAdvice } from '../UI/CardAdvice';
 import { Preloader } from '../UI/Preloader/Preloader';
 import { fadeIn } from 'react-animations';
+import { setSelectTheme } from '../services/slices/themeSlice';
 
 const Animation = keyframes`${fadeIn}`;
 
@@ -75,11 +76,11 @@ const EmptyContainer = styled.div`
 
 export const Card = () => {
   const { advices, status } = useSelector((store) => store.advices);
+  const { theme } = useSelector((store) => store.theme);
   const dispatch = useDispatch();
 
-  const [theme, setTheme] = useState('dark');
-
-  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
+  const toggleTheme = () =>
+    dispatch(setSelectTheme(theme === 'dark' ? 'light' : 'dark'));
 
   const handleRenderAdvice = () => {
     dispatch(fetchAdvices());
