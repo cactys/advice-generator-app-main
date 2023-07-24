@@ -89,8 +89,6 @@ export const Card = () => {
     document.body.setAttribute('data-theme', theme);
   }, [theme]);
 
-  console.log(status);
-
   return (
     <Wrapper>
       {status ? (
