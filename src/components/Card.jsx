@@ -2,7 +2,7 @@ import { keyframes, styled } from 'styled-components';
 import { BsDice5Fill, BsMoonFill, BsPauseFill } from 'react-icons/bs';
 import { ThemeChange } from '../UI/ThemeChange';
 import { Button } from '../UI/Button';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAdvices } from '../services/asyncThunk/fetchAdvices';
 import { CardTitle } from '../UI/CardTitle';
