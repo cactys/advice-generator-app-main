@@ -26,6 +26,11 @@ const Wrapper = styled.div`
   align-items: center;
   position: relative;
   box-shadow: var(--shadow);
+
+  @media (max-width: 425px) {
+    min-height: 200px;
+    height: 100%;
+  }
 `;
 
 const CardSeparator = styled.div`

@@ -31,7 +31,7 @@ const Wrapper = styled.div`
 
 const BoxLoader = styled.div`
   position: absolute;
-  width: 350px;
+  width: 210px;
   height: 1px;
   left: 0;
   right: 0;
