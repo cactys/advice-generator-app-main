@@ -8,6 +8,7 @@ const Wrapper = styled.button.attrs(({ $position, $top, $left }) => ({
     left: $left,
   },
 }))`
+  font-size: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +28,7 @@ const Wrapper = styled.button.attrs(({ $position, $top, $left }) => ({
 export const Button = ({ children, onClick, position, top, left }) => {
   return (
     <Wrapper $position={position} $top={top} $left={left} onClick={onClick}>
-      {children}
+      {children} random button
     </Wrapper>
   );
 };
