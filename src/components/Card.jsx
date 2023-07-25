@@ -74,7 +74,7 @@ const AnimatedWrapper = styled.div`
   animation: ${Animation} 2s alternate;
 `;
 
-const EmptyContainer = styled.div`
+const EmptyContainer = styled.h1`
   display: flex;
   flex: 1;
 `;
