@@ -1,5 +1,5 @@
 {
-  "homepage": "/",
+  "homepage": "./",
   "name": "advice-generator-app-main",
   "version": "0.1.0",
   "private": true,
