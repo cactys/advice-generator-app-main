@@ -51,5 +51,5 @@
 6. Запустить проект:
 
 ```sh
-    npm run start
+    npm start
 ```
