@@ -1,6 +1,6 @@
 ### [gh-page](https://cactys.github.io/advice-generator-app-main/)
 
-<details><summary><kpd> Frontend Mentor - Advice generator app </kpd></summary><p align="center"><kpd> <a href="Design preview for the Advice generator app coding challenge"><img width="768" height="auto" align="center" alt="desktop preview" src="./design/desktop-preview.jpg"></img></a></kpd></p></details>
+<details><summary><kpd> Frontend Mentor - Advice generator app </kpd></summary><p align="center"><kpd><img width="768" height="auto" align="center" alt="desktop preview" src="./design/desktop-preview.jpg"></img></kpd></p></details>
 
 ## Welcome! 👋
 
